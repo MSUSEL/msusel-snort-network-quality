@@ -1,0 +1,8 @@
+alert tcp any any -> any any (msg:"Benign File Detected Using Content Matching (v1)"; content:"This is a benign file. There is nothing interesting here."; sid:1;)
+
+alert tcp any any -> any any (msg:"Benign File Detected Using Hex Byte Sequence (v2)"; file_data, content:"|54 68 69 73 20 69 73 20 61 20 62 65 6e 69 67 6e 20 66 69 6c 65 2e 20 54 68 65 72 65 20 69 73 20 6e 6f 74 68 69 6e 67 20 69 6e 74 65 72 65 73 74 69 6e 67 20 68 65 72 65 2e|"; sid:2;)
+
+alert tcp any any -> any any (msg:"Activity on Port 4444 (v1)"; sid:3;)
+alert tcp any 4444 -> 127.0.0.1 any (msg:"Activity on Port 4444 (v2)"; sid:4;)
+alert tcp 127.0.0.1 4444 -> any any (msg:"Activity on Port 4444 (v3)"; sid:5;)
+alert tcp 127.0.0.1 any -> any 4444 (msg:"Activity on Port 4444 (v4)"; sid:6;)
