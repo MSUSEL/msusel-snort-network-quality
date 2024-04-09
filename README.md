@@ -1,5 +1,4 @@
-&nbsp;&nbsp;  <img src="readme-images/snort-icon.png" height="10%" width="10%"> 
-  
+
 
 # Problem Statement
 
@@ -70,7 +69,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 ### Introduction
 
-* An open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
+* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
 * Detection can be done through community rulesets and custom rules.
 * Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
 * Snort also provides detailed logging and output capabilities for effective threat investigation.
@@ -204,9 +203,11 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
+# Network Quality
 
+* In order to quantify network quality, we investigated attributes that best describe the impact of malware on a microservice ecosystem. We found severity (priority level of Snort rule triggered) and frequency (amount of snort rules triggered) to be effective methods of measuring malware’s effect on network quality. 
 
-
+<img src="readme-images/quality-tree-dark.png" height="40%" width="40%"> 
 
 
 
