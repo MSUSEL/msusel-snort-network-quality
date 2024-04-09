@@ -63,8 +63,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * ZLIB Version: 1.2.11
     * LZMA Version: 5.2.5
 
-# Snort 
-<img src="snort-network-quality/readme-images/snort-icon.png" height="50%" width="50%">
+# Snort   &nbsp;&nbsp;  <img src="readme-images/snort-icon.png" height="5%" width="5%">
 
 ### Introduction
 
