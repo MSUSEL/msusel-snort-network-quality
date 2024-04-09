@@ -25,7 +25,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 # Environment 
 
 * Operating System: Ubuntu Linux Version 22.04.3 LTS
-* Wireshark Version 4.2.2-1~ubuntu22.04.0~ppa2
+* Wireshark Version 4.2.2-1 ubuntu22.04.0 ppa2
   * Details
     * Priority: Optional
     * Section: Net
@@ -65,12 +65,14 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 # Snort
 
+### Introduction
+
 * An open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
 * Detection can be done through community rulesets and custom rules.
 * Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
 * Snort also provides detailed logging and output capabilities for effective threat investigation.
 
-## Snort Rules
+### Snort Rules
 
 * [Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])
   * Action: This specifies what action Snort should take when the rule matches. Common actions include "alert," which generates an alert, and "drop," which drops the packet.
@@ -81,7 +83,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
   * Destination Port: This specifies the destination port number on the destination IP.
   * Options: This optional field can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
 
-## Snort Process
+### Snort Process
 
 * Packet Decoder
   * Collects packets from various network interfaces and forwards them to the preprocessor.
@@ -92,7 +94,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 * Output Stage
   * Generates alerts and logs packets based on the detection engine's findings, with options to customize logging details.
  
-## Snort Configuration
+### Snort Configuration
 
 * Section 5: Configure Detection
   * Include custom rules file in Snort configuration.
@@ -101,7 +103,85 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
   * Uncomment the alert_fast line to enable the output log and specify file options.
     * ` alert_fast = {file = true} `
 
-# 
+# Test Case One
+
+### Description
+  * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data. To begin, create a rule file to store the Snort rules that will be parsed and add the specified rules. Finally, start Snort, send a benign file through Netcat, and check the log file for Snort alerts.
+
+### Steps
+  * Find a Port Number
+    * `netstat -an | grep 4444`
+    * `netstat -an | grep LISTEN | grep 4444`
+  * Put Networks in Promiscuous Mode
+    * `sudo ip link set dev enp0s31f6 promisc on`
+    * `sudo ip link set dev lo promisc on`
+  * Create Snort Rules
+    * Create a rule file and add the rules in local.rules
+  * Start Snort
+    * Terminal window 1:
+      * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
+        * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt
+        * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration
+        * “-i lo” specifies the interface that Snort should listen on for traffic
+        * “-R /usr/local/etc/snort/local.rules” specifies the rule file
+        * “-k none” disables checksum validation
+  * Send Benign File Using Netcat
+    * Terminal window 2:
+      * `nc -l 4444`
+    * Terminal window 3:
+      * `nc 127.0.0.1 4444 < file_to_send.txt`
+        * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444
+        * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection
+  * Stop Snort and check the alert_fast.txt output log
+      
+### Rule Descriptions
+  1. Benign File Detected Using Content Matching (v1):
+     * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
+     * Action: It generates an alert message stating that a benign file has been detected.
+     * Content Matching: The rule looks for the string "This is a benign file. There is nothing interesting here." within the TCP packet.
+     * SID: 1
+  
+  2. Activity on Port 4444 (v1):
+     * Description: This rule detects any activity on TCP port 4444, regardless of the source and destination.
+     * Action: It generates an alert message indicating activity on port 4444.
+     * SID: 3
+  
+  3. Activity on Port 4444 (v2):
+     * Description: This rule specifically detects TCP traffic going from any source to port 4444 on the local machine (127.0.0.1).
+     * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
+     * SID: 4
+  
+  4. Activity on Port 4444 (v3):
+     * Description: This rule detects TCP traffic going from port 4444 on the local machine (127.0.0.1) to any destination.
+     * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
+     * SID: 5
+  
+  5. Activity on Port 4444 (v4):
+     * Description: This rule detects TCP traffic going from any source to port 4444 on any destination.
+     * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
+     * SID: 6
+
+### Data Analysis and Results
+* We repeated the Test Case One process several times to determine if Snort alerts were consistently triggered.
+* Variables we examined include runtime, alerts, logged alerts, total alerts, port activity alerts, and content matching alerts.
+  * Alerts, logged alerts, total alerts, port activity alerts, and content-matching alerts remained constant across all runs of the experiment.
+  * The consistent port activity and content-matching alerts indicate a reliable testing environment.
+* While Snort was alerting consistently, the runtime somewhat varied across executions in Test Case One.
+  * The mean runtime of Snort was 93.868 seconds in Test Case One.
+  * Found that running Snort on Wireshark captures created a consistent and fast runtime.
+
+# Test Case Two
+
+### Description
+* Test Case Two was created to test Snort’s hash-matching and signature-based detection capabilities.
+
+
+
+
+
+
+
+
 
 
 
