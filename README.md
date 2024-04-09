@@ -1,3 +1,6 @@
+&nbsp;&nbsp;  <img src="readme-images/snort-icon.png" height="10%" width="10%"> 
+  
+
 # Problem Statement
 
 The Department of Homeland Security is committed to ensuring the quality and security of critical software systems. In collaboration with the DHS, Montana State University developed the software quality analysis tool, PIQUE. One PIQUE model is specifically focused on cloud microservice ecosystems, which involve containerizing services in cloud infrastructures using Docker to create efficient and scalable web applications. An integral aspect of cloud microservice ecosystems is networking, falling under infrastructure services.
@@ -63,7 +66,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * ZLIB Version: 1.2.11
     * LZMA Version: 5.2.5
 
-# Snort   &nbsp;&nbsp;  <img src="readme-images/snort-icon.png" height="5%" width="5%">
+# Snort 
 
 ### Introduction
 
