@@ -88,6 +88,8 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 ### Snort Process
 
+<img src="readme-images/snort-process.png" height="30%" width="30%"> 
+
 * Packet Decoder
   * Collects packets from various network interfaces and forwards them to the preprocessor.
 * Preprocessor
