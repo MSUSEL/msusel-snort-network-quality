@@ -35,7 +35,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * APT-Manual_Installed: Yes
 * Docker Version 25.0.3, Build 4debf41
   * Installation
-    * Instructions: https://docs.docker.com/desktop/install/ubuntu/
+    * [Instructions](https://docs.docker.com/desktop/install/ubuntu/)
       * Installed Docker’s apt Repository
       * Download DEB Package
       * Install Package w/ apt
@@ -53,7 +53,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
       * Context: desktop-linux
 * Snort Version 3.1.78.0
   * Installation
-    * Instructions: https://www.zenarmor.com/docs/linux-tutorials/how-to-install-and-configure-snort-on-ubuntu-linux#how-to-install-snort-3-on-ubuntu-2204
+    * [Instructions](https://www.zenarmor.com/docs/linux-tutorials/how-to-install-and-configure-snort-on-ubuntu-linux#how-to-install-snort-3-on-ubuntu-2204)
   * Details
     * DAQ Version: 3.0.14
     * LuaJIT Version: 2.1.0-beta3
@@ -106,57 +106,53 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 # Test Case One
 
 ### Description
-  * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data. To begin, create a rule file to store the Snort rules that will be parsed and add the specified rules. Finally, start Snort, send a benign file through Netcat, and check the log file for Snort alerts.
+  * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data.
 
 ### Steps
-  * Find a Port Number
-    * `netstat -an | grep 4444`
-    * `netstat -an | grep LISTEN | grep 4444`
-  * Put Networks in Promiscuous Mode
-    * `sudo ip link set dev enp0s31f6 promisc on`
-    * `sudo ip link set dev lo promisc on`
-  * Create Snort Rules
-    * Create a rule file and add the rules in local.rules
-  * Start Snort
-    * Terminal window 1:
-      * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
-        * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt
-        * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration
-        * “-i lo” specifies the interface that Snort should listen on for traffic
-        * “-R /usr/local/etc/snort/local.rules” specifies the rule file
-        * “-k none” disables checksum validation
-  * Send Benign File Using Netcat
-    * Terminal window 2:
-      * `nc -l 4444`
-    * Terminal window 3:
-      * `nc 127.0.0.1 4444 < file_to_send.txt`
-        * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444
-        * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection
-  * Stop Snort and check the alert_fast.txt output log
+  1. Find a Port Number
+      * `netstat -an | grep 4444`
+      * `netstat -an | grep LISTEN | grep 4444`
+  2. Put Networks in Promiscuous Mode
+      * `sudo ip link set dev enp0s31f6 promisc on`
+      * `sudo ip link set dev lo promisc on`
+  3. Create Snort Rules
+      * Create a rule file and add the rules in local.rules
+  4. Start Snort
+      * Terminal window 1:
+        * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
+          * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt
+          * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration
+          * “-i lo” specifies the interface that Snort should listen on for traffic
+          * “-R /usr/local/etc/snort/local.rules” specifies the rule file
+          * “-k none” disables checksum validation
+  5. Send Benign File Using Netcat
+      * Terminal window 2:
+        * `nc -l 4444`
+      * Terminal window 3:
+        * `nc 127.0.0.1 4444 < file_to_send.txt`
+          * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444
+          * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection
+  6. Stop Snort and check the alert_fast.txt output log
       
 ### Rule Descriptions
-  1. Benign File Detected Using Content Matching (v1):
-     * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
-     * Action: It generates an alert message stating that a benign file has been detected.
-     * Content Matching: The rule looks for the string "This is a benign file. There is nothing interesting here." within the TCP packet.
-     * SID: 1
-  
-  2. Activity on Port 4444 (v1):
+  * Benign File Detected Using Content Matching (v1):
+    * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
+    * Action: It generates an alert message stating that a benign file has been detected.
+    * Content Matching: The rule looks for the string "This is a benign file. There is nothing interesting here." within the TCP packet.
+    * SID: 1
+  * Activity on Port 4444 (v1):
      * Description: This rule detects any activity on TCP port 4444, regardless of the source and destination.
      * Action: It generates an alert message indicating activity on port 4444.
      * SID: 3
-  
-  3. Activity on Port 4444 (v2):
+  * Activity on Port 4444 (v2):
      * Description: This rule specifically detects TCP traffic going from any source to port 4444 on the local machine (127.0.0.1).
      * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
      * SID: 4
-  
-  4. Activity on Port 4444 (v3):
+  * Activity on Port 4444 (v3):
      * Description: This rule detects TCP traffic going from port 4444 on the local machine (127.0.0.1) to any destination.
      * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
      * SID: 5
-  
-  5. Activity on Port 4444 (v4):
+  * Activity on Port 4444 (v4):
      * Description: This rule detects TCP traffic going from any source to port 4444 on any destination.
      * Action: It generates an alert message indicating activity on port 4444 with this specific source-destination pattern.
      * SID: 6
@@ -173,7 +169,38 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 # Test Case Two
 
 ### Description
-* Test Case Two was created to test Snort’s hash-matching and signature-based detection capabilities.
+* Test Case Two was created to test Snort’s SHA-256 hash-matching and signature-based detection capabilities. This test case is also modeled after a previous experiment with Snort which can be found [here](https://github.com/megansteinmasel/snort-malware-detection).
+
+### Steps
+1. Create a Python Web Server
+    * [Instructions](https://www.geeksforgeeks.org/network-programming-python-http-server/)
+    * Create an index.html file that contains a download button for benign file 
+2. Put Networks in Promiscuous Mode
+    * `sudo ip link set dev enp0s31f6 promisc on`
+    * `sudo ip link set dev lo promisc on`
+3. Start Packet Capture on Wireshark
+4. Spin Up Web Server
+    * Go to localhost: 8080
+    * Press the download button to download the benign file
+5. Stop Packet Capture
+6. Run Snort on Packet Capture
+
+### Results
+* The port activity and content-matching rules from Test Case One still triggered when running Test Case Two.
+* Unfortunately, the SHA-256 hash matching rules did not trigger.
+* Decided to reach out to the Snort community via Discord for help.
+
+### Reaching Out to Development Team
+* Reached out via the Snort Discord channel for information regarding hash-matching in the context of the project.
+* Here’s what we learned:
+  * Using hash options (MD5, SHA-256, SHA-512) for real-time payload detection is inefficient.
+  * Without adding extra clarification for content-matching beforehand, every single packet’s hash value will have to be calculated.
+    * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
+  * Often won’t work for larger files as files must be reassembled from memory. 
+
+
+
+
 
 
 
