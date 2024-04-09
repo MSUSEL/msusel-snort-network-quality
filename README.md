@@ -107,7 +107,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
   * Uncomment the alert_fast line to enable the output log and specify file options.
     * ` alert_fast = {file = true} `
 
-# Test Case One
+# Test Case One - Test for Consistency
 
 ### Description
   * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data.
@@ -171,7 +171,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
   * Found that running Snort on Wireshark captures created a consistent and fast runtime.
 * Found that the Snort rule in local.rules with SID: 2 would only trigger while running Snort on Wireshark captures.
 
-# Test Case Two
+# Test Case Two - Explore SHA-256 Hash-Matching
 
 ### Description
 * Test Case Two was created to test Snort’s SHA-256 hash-matching and signature-based detection capabilities. This test case is also modeled after a previous experiment with Snort which can be found [here](https://github.com/megansteinmasel/snort-malware-detection).
@@ -179,7 +179,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 ### Steps
 1. Create a Python Web Server
     * [Instructions](https://www.geeksforgeeks.org/network-programming-python-http-server/)
-    * Create an index.html file that contains a download button for benign file 
+    * Create an index.html file that contains a download button for the benign file 
 2. Put Networks in Promiscuous Mode
     * `sudo ip link set dev enp0s31f6 promisc on`
     * `sudo ip link set dev lo promisc on`
@@ -207,7 +207,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 * In order to quantify network quality, we investigated attributes that best describe the impact of malware on a microservice ecosystem. We found severity (priority level of Snort rule triggered) and frequency (amount of snort rules triggered) to be effective methods of measuring malware’s effect on network quality. 
 
-<img src="readme-images/quality-tree-dark.png" height="40%" width="40%"> 
+<img src="readme-images/quality-tree-dark.png" height="70%" width="70%"> 
 
 
 
