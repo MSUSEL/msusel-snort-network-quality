@@ -165,6 +165,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 * While Snort was alerting consistently, the runtime somewhat varied across executions in Test Case One.
   * The mean runtime of Snort was 93.868 seconds in Test Case One.
   * Found that running Snort on Wireshark captures created a consistent and fast runtime.
+* Found that the Snort rule in local.rules with SID: 2 would only trigger while running Snort on Wireshark captures.
 
 # Test Case Two
 
