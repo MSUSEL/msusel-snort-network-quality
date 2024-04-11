@@ -1,17 +1,75 @@
+# Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers 
 
 
-# Problem Statement
+## Snort 
+
+### Introduction
+
+* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
+* Detection can be done through community rulesets and custom rules.
+* Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
+* Snort also provides detailed logging and output capabilities for effective threat investigation.
+
+### Snort Intrusion Detection Process
+
+* An intrusion detection system is a security tool that monitors traffic on a network for malicious activity. Intrusion detection system functions include analyzing system vulnerabilities, user activities, recognizing patterns typical of known cybersecurity threats, and many others.
+* At the core of Snort's intrusion detection system, the packet decoder efficiently gathers packets from various interfaces, forwards them for preprocessing or direct analysis by the detection engine, and ultimately generates alerts and logs based on intrusion detection findings. All of these components collaborate to identify specific threats and subsequently implement the necessary actions tailored to each particular threat.
+
+<img src="readme-images/snort-process-dark.png" height="40%" width="40%"> 
+
+* Packet Decoder
+  * This process gathers packets from various network interfaces like Ethernet, SLIP, or PPP. It then forwards these packets either to a preprocessor or directly to the detection engine for further analysis.
+* Preprocessor
+  * The preprocessor manipulates or organizes packets before they reach the detection engine. Its primary function is to perform operations on packets, such as repairing corrupted packets or generating alerts if anomalies are detected. It plays a crucial role in ensuring the integrity of packet content by rearranging strings and detecting patterns within them. Additionally, the preprocessor handles defragmentation, a vital task to reassemble fragmented packets.
+* Detection Engine
+  * The Detection Engine is responsible for identifying intrusion activities within packets by utilizing Snort rules. Upon detecting such activity, it applies the corresponding rule, while dropping the packet if no intrusion is detected. The response time of the Detection Engine varies depending on factors such as the processing power of the machine and the number of rules defined in the system.
+* Output Stage
+  * This comprehensive system is responsible for generating alerts and logging packets. It operates based on the findings of the detection engine. Depending on the content of a packet, it may either log the activity or trigger an alert. All log files are stored in a preconfigured location, which can be customized using command line options. The system offers various command line options to modify the type and detail of logged information.
+ 
+
+### Snort Rules
+
+* Snort rules contain two parts, the rule header and the rule options. The rule header contains information that specifies the conditions under which action the rule takes. Rule options provide further refined criteria for matching traffic against the rule header. These options are used to specify the characteristics of the traffic being monitored and the conditions for triggering an alert. Common options include:
+  * File Inspection: Inspect file data within network traffic for malicious indicators.
+  * Content-Matching: Allows matching based on the content of the packet payload.
+  * Byte-Testing: Tests specific byte sequences within packets.
+* Combining the rule header with the rule options produces the following Snort rule structure:
+  * [Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])
+    * Action: This specifies what action Snort should take when the rule matches. Common actions include "alert," which generates an alert, and "drop," which drops the packet.
+    * Protocol: This specifies the network protocol being used, such as TCP, UDP, or ICMP.
+    * Source IP: This specifies the source IP address from which the traffic originates.
+    * Source Port: This specifies the source port number used by the sender.
+    * Direction: Dictates which IP address and port number is the source and which is the destination.
+    * Destination IP: This specifies the destination IP address to which the traffic is being sent.
+    * Destination Port: This specifies the destination port number on the destination IP.
+    * Options: This optional field can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
+
+### Snort Community Rulesets and Custom Rules
+* Community rulesets are pre-defined rulesets created and maintained by the Snort community. These rulesets are developed by security professionals and researchers to detect various types of network threats and attacks. Community rulesets are often updated frequently to address emerging vulnerabilities.
+* Custom rules allow users to define their detection criteria tailored to their specific network environment and security requirements. This process encompasses creating a ruleset file and including it in Section 5 of the Snort configuration file.
+
+### Snort Configuration
+
+* Section 5: Configure Detection
+  * Include custom ruleset file in Snort configuration.
+    * ` ips = {variables = default_variables, include = 'local.rules'} `
+* Section 7: Configure Outputs
+  * Uncomment the alert_fast line to enable the output log and specify file options.
+    * ` alert_fast = {file = true} `
+
+
+## Problem Statement
 
 The Department of Homeland Security is committed to ensuring the quality and security of critical software systems. In collaboration with the DHS, Montana State University developed the software quality analysis tool, PIQUE. One PIQUE model is specifically focused on cloud microservice ecosystems, which involve containerizing services in cloud infrastructures using Docker to create efficient and scalable web applications. An integral aspect of cloud microservice ecosystems is networking, falling under infrastructure services.
 In our ever-evolving digital landscape, malicious actors continually discover new methods to disrupt networks. Tools such as Snort and Wireshark empower cybersecurity professionals to counteract and measure attempts to disrupt network quality. These tools provide the means to log and detect both benign and malicious network traffic, allowing professionals to react accordingly. By using Snort and Wireshark in tandem, we can construct testing methods to measure and quantify network quality.
 
-# Project Goals
+## Project Goals
 
 * Create a stable testing environment for generating and testing Snort rules.
 * Gain proficiency in writing Snort rules.
 * Understand network traffic patterns between Docker containers.
 
-# Steps
+## Steps
 
 1. Install a free Linux distribution. We used Ubuntu 22.04.3 LTS 
 2. Install the most recent versions of Snort, Docker, and Wireshark.
@@ -24,7 +82,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
    * Analyze communication patterns and specific packets triggering Snort alerts in Wireshark.
 7. Develop a scheme for measuring the effect of Snort alerts on network quality (severity & frequency).
 
-# Environment 
+## Environment 
 
 * Operating System: Ubuntu Linux Version 22.04.3 LTS
 * Wireshark Version 4.2.2-1 ubuntu22.04.0 ppa2
@@ -65,49 +123,8 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * ZLIB Version: 1.2.11
     * LZMA Version: 5.2.5
 
-# Snort 
 
-### Introduction
-
-* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
-* Detection can be done through community rulesets and custom rules.
-* Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
-* Snort also provides detailed logging and output capabilities for effective threat investigation.
-
-### Snort Rules
-
-* [Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])
-  * Action: This specifies what action Snort should take when the rule matches. Common actions include "alert," which generates an alert, and "drop," which drops the packet.
-  * Protocol: This specifies the network protocol being used, such as TCP, UDP, or ICMP.
-  * Source IP: This specifies the source IP address from which the traffic originates.
-  * Source Port: This specifies the source port number used by the sender.
-  * Destination IP: This specifies the destination IP address to which the traffic is being sent.
-  * Destination Port: This specifies the destination port number on the destination IP.
-  * Options: This optional field can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
-
-### Snort Process
-
-<img src="readme-images/snort-process-dark.png" height="40%" width="40%"> 
-
-* Packet Decoder
-  * Collects packets from various network interfaces and forwards them to the preprocessor.
-* Preprocessor
-  * Modifies and organizes packets before they're analyzed by the detection engine.
-* Detection Engine
-  * Identify intrusion activities within packets by utilizing Snort rules.
-* Output Stage
-  * Generates alerts and logs packets based on the detection engine's findings, with options to customize logging details.
- 
-### Snort Configuration
-
-* Section 5: Configure Detection
-  * Include custom rules file in Snort configuration.
-    * ` ips = {variables = default_variables, include = 'local.rules'} `
-* Section 7: Configure Outputs
-  * Uncomment the alert_fast line to enable the output log and specify file options.
-    * ` alert_fast = {file = true} `
-
-# Test Case One - Test for Consistency
+## Test Case One - Test for Consistency
 
 ### Description
   * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data.
@@ -171,7 +188,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
   * Found that running Snort on Wireshark captures created a consistent and fast runtime.
 * Found that the Snort rule in local.rules with SID: 2 would only trigger while running Snort on Wireshark captures.
 
-# Test Case Two - Explore SHA-256 Hash-Matching
+## Test Case Two - Explore SHA-256 Hash-Matching
 
 ### Description
 * Test Case Two was created to test Snort’s SHA-256 hash-matching and signature-based detection capabilities. This test case is also modeled after a previous experiment with Snort which can be found [here](https://github.com/megansteinmasel/snort-malware-detection).
@@ -203,7 +220,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
-# Network Quality
+## Network Quality
 
 * In order to quantify network quality, we investigated attributes that best describe the impact of malware on a microservice ecosystem. We found severity (priority level of Snort rule triggered) and frequency (amount of snort rules triggered) to be effective methods of measuring malware’s effect on network quality. 
 
