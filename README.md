@@ -1,5 +1,6 @@
 # Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers 
 
+* In the Snort research project, we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to fortify network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a robust testing environment is established, alongside enhanced proficiency in crafting custom detection rules. By leveraging metrics such as severity and frequency, the exploration of network traffic analysis within Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices in today's dynamic digital landscape.
 
 ## Snort 
 
