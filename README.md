@@ -145,7 +145,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
           * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration
           * “-i lo” specifies the interface that Snort should listen on for traffic
           * “-R /usr/local/etc/snort/local.rules” specifies the rule file
-          * “-k none” disables checksum validation
+          * “-k none” disables checksum validation of packets
   5. Send Benign File Using Netcat
       * Terminal window 2:
         * `nc -l 4444`
@@ -154,7 +154,12 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
           * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444
           * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection
   6. Stop Snort and check the alert_fast.txt output log
-      
+
+### Running Snort
+* In Test Case One, we ran Snort in the following manner.
+  <img src="readme-images/.png" height="40%" width="40%">
+* Running Snort in this manner is typically done for real-time network traffic analysis and intrusion detection. It's used to actively monitor network traffic as it flows through the specified network interface.
+
 ### Rule Descriptions
   * Benign File Detected Using Content Matching (v1):
     * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
@@ -206,6 +211,11 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
     * Press the download button to download the benign file
 5. Stop Packet Capture
 6. Run Snort on Packet Capture
+
+### Running Snort
+* In Test Case Two, we ran Snort in the following manner.
+  <img src="readme-images/.png" height="40%" width="40%">
+* Running Snort with Wireshark captures involves analyzing pre-recorded network traffic stored in pcap files (Wireshark capture files). It's used to analyze historical network data or traffic captured from various sources, rather than monitoring live traffic.
 
 ### Results
 * The port activity and content-matching rules from Test Case One still triggered when running Test Case Two.
