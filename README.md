@@ -157,7 +157,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 ### Running Snort
 * In Test Case One, we ran Snort in the following manner.
-  <img src="readme-images/.png" height="40%" width="40%">
+  <img src="readme-images/testcaseone.png" height="40%" width="40%">
 * Running Snort in this manner is typically done for real-time network traffic analysis and intrusion detection. It's used to actively monitor network traffic as it flows through the specified network interface.
 
 ### Rule Descriptions
@@ -214,7 +214,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 ### Running Snort
 * In Test Case Two, we ran Snort in the following manner.
-  <img src="readme-images/.png" height="40%" width="40%">
+  <img src="readme-images/testcasetwo.png" height="40%" width="40%">
 * Running Snort with Wireshark captures involves analyzing pre-recorded network traffic stored in pcap files (Wireshark capture files). It's used to analyze historical network data or traffic captured from various sources, rather than monitoring live traffic.
 
 ### Results
