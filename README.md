@@ -1,6 +1,6 @@
 # Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers 
 
-* In this research project, we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a robust testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis within Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices in today's dynamic digital landscape.
+* In this research project we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis within Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices in today's dynamic digital landscape.
 
 ## Contributors
 * Megan Steinmasel
@@ -34,7 +34,6 @@
 * Output Stage
   * This comprehensive system is responsible for generating alerts and logging packets. It operates based on the findings of the detection engine. Depending on the content of a packet, it may either log the activity or trigger an alert. All log files are stored in a preconfigured location, which can be customized using command line options. The system offers various command line options to modify the type and detail of logged information.
  
-
 ### Snort Rules
 
 * Snort rules contain two parts, the rule header and the rule options. The rule header contains information that specifies the conditions under which action the rule takes. Rule options provide further refined criteria for matching traffic against the rule header. These options are used to specify the characteristics of the traffic being monitored and the conditions for triggering an alert. Common options include:
@@ -55,11 +54,22 @@
 * To get started writing custom Snort rules, we used [Snorpy](http://snorpy.cyb3rs3c.net/) to initiate the process.
 
 ### Snort Community Rulesets and Custom Rules
+
 * Community rulesets are pre-defined rulesets created and maintained by the Snort community. These rulesets are developed by security professionals and researchers to detect various types of network threats and attacks. Community rulesets are often updated frequently to address emerging vulnerabilities.
   * To download the Snort 3 community ruleset (snort3-community-rules.tar.gz), [press here](https://www.snort.org/downloads).
-* Custom rules allow users to define their detection criteria tailored to their specific network environment and security requirements. This process encompasses creating a ruleset file and including it in Section 5 of the Snort configuration file.
+* Custom rules allow users to define their detection criteria tailored to their specific network environment and security requirements. This process encompasses creating a ruleset file and including it in Section 5 of the Snort configuration file. Below are a few examples of custom Snort rules.
+  * `alert icmp any any -> any any (msg:"ICMP Ping Detected"; sid:1;)`
+    * This Snort rule detects ICMP pings from any source IP and port, to any destination IP and port.
+  * `alert tcp any any -> any 80 (msg:"HTTP GET Request Detected"; content:"GET"; http_method; sid:2;)`
+    * This Snort rule will generate an alert for any HTTP GET request sent over TCP port 80.
+
+
+
+
+
 
 ### Snort Configuration
+
 * We will be focusing on Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the configuration file. Section 5 is dedicated to configuring Snort's detection abilities. These options include enabling decoder and inspector alerts, including custom rulesets and default variables, configuring additional rule actions like react or reject, and enabling the payload injection utility. Section 7 is dedicated to configure various outputs from the detection engine. These options include event logging, packet logging, and additional log options like packet capture and file log. 
 * Only Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the Snort configuration were modified to tailor the system to our project's requirements and goals. Below are the changes we made to the initial Snort configuration.
   * Section 5: Configure Detection
