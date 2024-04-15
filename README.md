@@ -1,15 +1,22 @@
 # Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers 
 
-* In the Snort research project, we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to fortify network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a robust testing environment is established, alongside enhanced proficiency in crafting custom detection rules. By leveraging metrics such as severity and frequency, the exploration of network traffic analysis within Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices in today's dynamic digital landscape.
+* In this research project, we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a robust testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis within Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices in today's dynamic digital landscape.
+
+## Contributors
+* Megan Steinmasel
+* Brian Schumitz
 
 ## Snort 
 
+* We are employing Snort 3 for real-time threat detection in our research project.
+* Consult the official [Snort 3 documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
+
 ### Introduction
 
-* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
+* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real-time, analyzing packets against rule files and generating alerts.
 * Detection can be done through community rulesets and custom rules.
 * Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
-* Snort also provides detailed logging and output capabilities for effective threat investigation.
+* Snort also provides detailed logging and output capabilities for effective threat investigation. 
 
 ### Snort Intrusion Detection Process
 
@@ -19,11 +26,11 @@
 <img src="readme-images/snort-process-dark.png" height="40%" width="40%"> 
 
 * Packet Decoder
-  * This process gathers packets from various network interfaces like Ethernet, SLIP, or PPP. It then forwards these packets either to a preprocessor or directly to the detection engine for further analysis.
+  * This process gathers packets from various network interfaces. It then forwards these packets either to a preprocessor or directly to the detection engine for further analysis.
 * Preprocessor
   * The preprocessor manipulates or organizes packets before they reach the detection engine. Its primary function is to perform operations on packets, such as repairing corrupted packets or generating alerts if anomalies are detected. It plays a crucial role in ensuring the integrity of packet content by rearranging strings and detecting patterns within them. Additionally, the preprocessor handles defragmentation, a vital task to reassemble fragmented packets.
 * Detection Engine
-  * The Detection Engine is responsible for identifying intrusion activities within packets by utilizing Snort rules. Upon detecting such activity, it applies the corresponding rule, while dropping the packet if no intrusion is detected. The response time of the Detection Engine varies depending on factors such as the processing power of the machine and the number of rules defined in the system.
+  * The detection engine is responsible for identifying intrusion activities within packets by utilizing Snort rules. Upon detecting such activity, it applies the corresponding rule, while dropping the packet if no intrusion is detected. The response time of the detection engine varies depending on factors such as the processing power of the machine and the number of rules defined in the system.
 * Output Stage
   * This comprehensive system is responsible for generating alerts and logging packets. It operates based on the findings of the detection engine. Depending on the content of a packet, it may either log the activity or trigger an alert. All log files are stored in a preconfigured location, which can be customized using command line options. The system offers various command line options to modify the type and detail of logged information.
  
@@ -37,27 +44,30 @@
 * Combining the rule header with the rule options produces the following Snort rule structure:
   * [Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])
     * Action: This specifies what action Snort should take when the rule matches. Common actions include "alert," which generates an alert, and "drop," which drops the packet.
-    * Protocol: This specifies the network protocol being used, such as TCP, UDP, or ICMP.
+      * Other options include "log," "pass," "reject," "sdrop," and "dynamic."
+    * Protocol: This specifies the network protocol being used, such as TCP, UDP, ICMP, or IP.
     * Source IP: This specifies the source IP address from which the traffic originates.
     * Source Port: This specifies the source port number used by the sender.
     * Direction: Dictates which IP address and port number is the source and which is the destination.
     * Destination IP: This specifies the destination IP address to which the traffic is being sent.
     * Destination Port: This specifies the destination port number on the destination IP.
     * Options: This optional field can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
+* To get started writing custom Snort rules, we used [Snorpy](http://snorpy.cyb3rs3c.net/) to initiate the process.
 
 ### Snort Community Rulesets and Custom Rules
 * Community rulesets are pre-defined rulesets created and maintained by the Snort community. These rulesets are developed by security professionals and researchers to detect various types of network threats and attacks. Community rulesets are often updated frequently to address emerging vulnerabilities.
+  * To download the Snort 3 community ruleset (snort3-community-rules.tar.gz), [press here](https://www.snort.org/downloads).
 * Custom rules allow users to define their detection criteria tailored to their specific network environment and security requirements. This process encompasses creating a ruleset file and including it in Section 5 of the Snort configuration file.
 
 ### Snort Configuration
-
-* Section 5: Configure Detection
-  * Include custom ruleset file in Snort configuration.
-    * ` ips = {variables = default_variables, include = 'local.rules'} `
-* Section 7: Configure Outputs
-  * Uncomment the alert_fast line to enable the output log and specify file options.
-    * ` alert_fast = {file = true} `
-
+* We will be focusing on Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the configuration file. Section 5 is dedicated to configuring Snort's detection abilities. These options include enabling decoder and inspector alerts, including custom rulesets and default variables, configuring additional rule actions like react or reject, and enabling the payload injection utility. Section 7 is dedicated to configure various outputs from the detection engine. These options include event logging, packet logging, and additional log options like packet capture and file log. 
+* Only Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the Snort configuration were modified to tailor the system to our project's requirements and goals. Below are the changes we made to the initial Snort configuration.
+  * Section 5: Configure Detection
+    * Include a custom ruleset file that Snort will utilize during the detection process.
+      * ` ips = {variables = default_variables, include = 'local.rules'} `
+  * Section 7: Configure Outputs
+    * Uncomment the alert_fast line to enable the output log and specify file options.
+      * ` alert_fast = {file = true} `
 
 ## Problem Statement
 
@@ -72,7 +82,7 @@ In our ever-evolving digital landscape, malicious actors continually discover ne
 
 ## Steps
 
-1. Install a free Linux distribution. We used Ubuntu 22.04.3 LTS 
+1. Install a free Linux distribution. We used Ubuntu 22.04.3 LTS.
 2. Install the most recent versions of Snort, Docker, and Wireshark.
 3. Configure Snort, Docker, and Wireshark.
 4. Validate consistency of tools:
