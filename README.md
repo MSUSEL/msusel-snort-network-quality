@@ -64,10 +64,6 @@
     * This Snort rule will generate an alert for any HTTP GET request sent over TCP port 80.
 
 
-
-
-
-
 ### Snort Configuration
 
 * We will be focusing on Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the configuration file. Section 5 is dedicated to configuring Snort's detection abilities. These options include enabling decoder and inspector alerts, including custom rulesets and default variables, configuring additional rule actions like react or reject, and enabling the payload injection utility. Section 7 is dedicated to configure various outputs from the detection engine. These options include event logging, packet logging, and additional log options like packet capture and file log. 
@@ -81,7 +77,7 @@
 
 ## Problem Statement
 
-Ensuring the quality and security of software systems is crucial in our ever-expanding digital world. To that end, the Software Engineering and Cybersecurity Lab (SECL) at Montana State University developed PIQUE: a Platform for Investigative software Quality Understanding and Evaluation. PIQUE is a language-agnostic system that can be adjusted for language-specific static-analysis operations. One PIQUE model focuses on measuring the quality of cloud microservice ecosystems. Cloud ecosystems use tools like Docker, an open-source development tool, to deploy, run, update, and manage containerized services to create efficient and scalable web applications. Our research is focused on measuring the quality of networking services, which are critical in cloud infrastructure. Computer networks are constant targets of cyber-attacks, and many incident response tools exist to defend against malicious network traffic. One of these tools is called Snort. Snort is an open-source intrusion detection and prevention system that can detect and log benign and malicious network traffic using rules. Snort rules delineate patterns to look out for in network traffic. Then, when those patterns are detected, rules will tell Snort how to react. Snort rules are powerful and have extensive customizability. By taking advantage of Snort’s flexible and powerful rule options, we can construct testing methods to measure and quantify the network quality of cloud ecosystems. Our research goal is to automate the process of running network quality tests between containerized services that use Docker.
+* Ensuring the quality and security of software systems is crucial in our ever-expanding digital world. To that end, the Software Engineering and Cybersecurity Lab (SECL) at Montana State University developed PIQUE: a Platform for Investigative software Quality Understanding and Evaluation. PIQUE is a language-agnostic system that can be adjusted for language-specific static-analysis operations. One PIQUE model focuses on measuring the quality of cloud microservice ecosystems. Cloud ecosystems use tools like Docker, an open-source development tool, to deploy, run, update, and manage containerized services to create efficient and scalable web applications. Our research is focused on measuring the quality of networking services, which are critical in cloud infrastructure. Computer networks are constant targets of cyber-attacks, and many incident response tools exist to defend against malicious network traffic. One of these tools is called Snort. Snort is an open-source intrusion detection and prevention system that can detect and log benign and malicious network traffic using rules. Snort rules delineate patterns to look out for in network traffic. Then, when those patterns are detected, rules will tell Snort how to react. Snort rules are powerful and have extensive customizability. By taking advantage of Snort’s flexible and powerful rule options, we can construct testing methods to measure and quantify the network quality of cloud ecosystems. Our research goal is to automate the process of running network quality tests between containerized services that use Docker.
 
 ## Project Goals
 
@@ -256,9 +252,17 @@ Ensuring the quality and security of software systems is crucial in our ever-exp
     * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
-## Network Quality
+## In Progress & Future Work
 
-* In order to quantify network quality, we investigated attributes that best describe the impact of malware on a microservice ecosystem. We found severity (priority level of Snort rule triggered) and frequency (amount of snort rules triggered) to be effective methods of measuring malware’s effect on network quality. 
+### Docker 
+
+* We are currently concentrating on analyzing network traffic between Docker containers and assessing the effectiveness of Snort in detecting security threats between containerized environments.
+* This process entails conducting a comprehensive literature review and identifying test scenarios for network traffic analysis.
+* These steps will contribute to the development of our network quality model.
+
+### Network Quality
+
+* Although the quality of network security between Docker containers has not been measured before, we suspect that using Snort for network traffic analysis, measuring severity (priority level of Snort rule triggered) and frequency (amount of Snort rules triggered), can be beneficial. This measurement, focusing on severity and frequency, is currently being integrated into our expanding model. Additionally, the depiction of this process in our evolving quality tree model signifies ongoing development towards a comprehensive evaluation of network security effectiveness.
 
 <img src="readme-images/quality-tree-dark.png" height="70%" width="70%"> 
 
