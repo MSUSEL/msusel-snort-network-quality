@@ -6,12 +6,13 @@
 * Megan Steinmasel
 * Brian Schumitz
 
-## Snort 
+## Introduction to Snort 
 
 * We are employing Snort 3 for real-time threat detection in our research project.
 * Consult the official [Snort 3 documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
+* If you wish to bypass the 'Introduction to Snort' and proceed to our 'Problem Statement,' click [here](https://github.com/megansteinmasel/snort-network-quality/edit/main/README.md#problem-statement).
 
-### Introduction
+### Overview
 
 * Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real-time, analyzing packets against rule files and generating alerts.
 * Detection can be done through community rulesets and custom rules.
@@ -23,7 +24,7 @@
 * An intrusion detection system is a security tool that monitors traffic on a network for malicious activity. Intrusion detection system functions include analyzing system vulnerabilities, user activities, recognizing patterns typical of known cybersecurity threats, and many others.
 * At the core of Snort's intrusion detection system, the packet decoder efficiently gathers packets from various interfaces, forwards them for preprocessing or direct analysis by the detection engine, and ultimately generates alerts and logs based on intrusion detection findings. All of these components collaborate to identify specific threats and subsequently implement the necessary actions tailored to each particular threat.
 
-<img src="readme-images/snort-process-dark.png" height="40%" width="40%"> 
+<img src="readme-images/snort-process-dark.png" height="50%" width="50%"> 
 
 * Packet Decoder
   * This process gathers packets from various network interfaces. It then forwards these packets either to a preprocessor or directly to the detection engine for further analysis.
@@ -174,7 +175,7 @@
 ### Running Snort
 * In Test Case One, we ran Snort in the following manner.
   
-  <img src="readme-images/testcase1.png" height="40%" width="40%">
+  <img src="readme-images/testcase1.png" height="70%" width="70%">
   
 * Running Snort in this manner is typically done for real-time network traffic analysis and intrusion detection. It's used to actively monitor network traffic as it flows through the specified network interface.
 
@@ -235,7 +236,7 @@
 ### Running Snort
 * In Test Case Two, we ran Snort in the following manner.
   
-  <img src="readme-images/testcase2.png" height="40%" width="40%">
+  <img src="readme-images/testcase2.png" height="63%" width="63%">
  
 * Running Snort with Wireshark captures involves analyzing pre-recorded network traffic stored in pcap files (Wireshark capture files). It's used to analyze historical network data or traffic captured from various sources, rather than monitoring live traffic.
 
@@ -267,7 +268,7 @@
 <img src="readme-images/quality-tree-dark.png" height="70%" width="70%"> 
 
 
-
+## Other Works
 
 
 
