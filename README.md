@@ -10,7 +10,7 @@
 
 * We are employing Snort 3 for real-time threat detection in our research project.
 * Consult the official [Snort 3 documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
-* If you wish to bypass the 'Introduction to Snort' and proceed to our 'Problem Statement,' click [here](https://github.com/megansteinmasel/snort-network-quality/edit/main/README.md#problem-statement).
+* If you wish to bypass the 'Introduction to Snort' and proceed to our 'Problem Statement,' click [here](https://github.com/megansteinmasel/snort-network-quality/tree/main?tab=readme-ov-file#problem-statement).
 
 ### Overview
 
