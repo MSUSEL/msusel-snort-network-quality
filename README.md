@@ -1,10 +1,24 @@
 # Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers 
 
-* In this research project we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis between Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices.
+### May, 2024
 
-## Contributors
+### Research Conducted By:
 * Megan Steinmasel
 * Brian Schumitz
+
+### Documentation Created By:
+* Megan Steinmasel
+
+### Affiliation:
+* Montana State University
+* Software Engineering and Cybersecurity Laboratory (SECL)
+* Bozeman, Montana
+
+### Advisor:
+* Clemente Izurieta
+
+### Research Overview
+* In this research project we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis between Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices.
 
 ## Introduction to Snort 
 
@@ -284,6 +298,13 @@
   <img src="readme-images/research.png" height="100%" width="100%"> 
   <img src="readme-images/snort-poster.jpg" height="100%" width="100%"> 
 
+## References
+
+Shah, S. N., & Singh, P. (2012). Signature-based network intrusion detection system using Snort and WinPcap. International Journal of Engineering Research & Technology (IJERT), 1(10), 2278-0181.
+
+Snort. (n.d.). Snort 3 rule writing guide: Getting started with Snort 3. Snort Project. https://docs.snort.org/start/
+
+chrisjd20. (2019). Snorpy. Github. https://github.com/chrisjd20/Snorpy
 
 
 
