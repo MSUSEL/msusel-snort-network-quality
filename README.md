@@ -263,18 +263,18 @@
 
 ### Network Quality
 
-* Although the quality of network security between Docker containers has not been measured before, we suspect that using Snort for network traffic analysis, measuring severity (priority level of Snort rule triggered) and frequency (amount of Snort rules triggered), can be beneficial. This measurement, focusing on severity and frequency, is currently being integrated into our expanding model. Additionally, the depiction of this process in our evolving quality tree model signifies ongoing development towards a comprehensive evaluation of network security effectiveness.
+* Although the quality of network security between Docker containers has not been measured before, we suspect that using Snort for network traffic analysis, measuring severity (priority level of Snort rule triggered) and frequency (amount of Snort rules triggered), can be beneficial. This measurement, focusing on severity and frequency, is currently being integrated into our expanding model. Additionally, the depiction of this process in our evolving quality tree model signifies ongoing development towards evaluation of network security.
 
-  <img src="readme-images/quality-tree-dark.png" height="70%" width="70%"> 
+  <img src="readme-images/quality-tree-dark.png" height="100%" width="100%"> 
 
 
 ## Other Works
 
 * Excited to have shared our latest research on Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers at the Montana State University Research Celebration! Grateful for the opportunity to connect with fellow student researchers!
-  <img src="readme-images/research1.jpg" height="70%" width="70%"> 
-
-
- <img src="readme-images/snort-poster.jpg" height="80%" width="80%"> 
+* The Spring 2024 MSU Research Celebration Program can be found [here](https://www.montana.edu/usp/src-programs/2024SpringResearchCelebrationProgram.pdf).
+  
+  <img src="readme-images/research.png" height="100%" width="100%"> 
+  <img src="readme-images/snort-poster.jpg" height="100%" width="100%"> 
 
 
 
