@@ -272,8 +272,15 @@
 
 * Excited to have shared our latest research on Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers at the Montana State University Research Celebration! Grateful for the opportunity to connect with fellow student researchers!
 
-<img src="readme-images/research.jpg" height="60%" width="60%"> 
-<img src="readme-images/snort-poster.jpg" height="60%" width="60%"> 
+
+<p float="left">
+  <img src="readme-images/research1.jpg" height="50%" width="50%"> 
+  <img src="readme-images/research2.jpg" height="50%" width="50%"> 
+</p>
+
+
+
+<img src="readme-images/snort-poster.jpg" height="80%" width="80%"> 
 
 
 
