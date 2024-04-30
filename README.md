@@ -47,7 +47,7 @@
       * Other options include "log," "pass," "reject," "sdrop," and "dynamic."
     * Protocol: This specifies the network protocol being used, such as TCP, UDP, ICMP, or IP.
     * Source IP: This specifies the source IP address from which the traffic originates.
-    * Source Port: This specifies the source port number used by the sender.
+    * Source Port: This specifies the source port number on the source IP.
     * Direction: Dictates which IP address and port number is the source and which is the destination.
     * Destination IP: This specifies the destination IP address to which the traffic is being sent.
     * Destination Port: This specifies the destination port number on the destination IP.
@@ -75,6 +75,8 @@
   * Section 7: Configure Outputs
     * Uncomment the alert_fast line to enable the output log and specify file options.
       * ` alert_fast = {file = true} `
+
+ * With this comprehensive overview of Snort, we're ready to delve into the project details.
 
 ## Problem Statement
 
@@ -147,30 +149,34 @@
   * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data.
 
 ### Steps
-  1. Find a Port Number
+  1. Create a Benign File
+      * This file will be referred to as file_to_send.txt.
+  3. Find a Port Number
       * `netstat -an | grep 4444`
       * `netstat -an | grep LISTEN | grep 4444`
-  2. Put Networks in Promiscuous Mode
+  4. Put Networks in Promiscuous Mode
       * `sudo ip link set dev enp0s31f6 promisc on`
       * `sudo ip link set dev lo promisc on`
-  3. Create Snort Rules
-      * Create a rule file and add the rules in local.rules
-  4. Start Snort
+  5. Create Snort Rules
+      * Create a rule file and add the rules in local.rules.
+  6. Start Snort
       * Terminal window 1:
         * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
-          * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt
-          * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration
-          * “-i lo” specifies the interface that Snort should listen on for traffic
-          * “-R /usr/local/etc/snort/local.rules” specifies the rule file
-          * “-k none” disables checksum validation of packets
-  5. Send Benign File Using Netcat
+          * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt.
+          * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration.
+          * “-i lo” specifies the interface that Snort should listen on for traffic.
+          * “-R /usr/local/etc/snort/local.rules” specifies the rule file.
+          * “-k none” disables checksum validation of packets.
+  7. Send Benign File Using Netcat
       * Terminal window 2:
         * `nc -l 4444`
       * Terminal window 3:
         * `nc 127.0.0.1 4444 < file_to_send.txt`
-          * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444
-          * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection
-  6. Stop Snort and check the alert_fast.txt output log
+          * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444.
+          * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection.
+  8. Stop Snort
+     * End Snort with holding the command button and pressing "c" on the keyboard.
+     * Check the alert_fast.txt output log.
 
 ### Running Snort
 * In Test Case One, we ran Snort in the following manner.
@@ -180,6 +186,7 @@
 * Running Snort in this manner is typically done for real-time network traffic analysis and intrusion detection. It's used to actively monitor network traffic as it flows through the specified network interface.
 
 ### Rule Descriptions
+* Below is a list of successfilly and consistently triggering Snort rules in Test Case One and their descriptions.
   * Benign File Detected Using Content Matching (v1):
     * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
     * Action: It generates an alert message stating that a benign file has been detected.
@@ -218,18 +225,19 @@
 * Test Case Two was created to test Snort’s SHA-256 hash-matching and signature-based detection capabilities. This test case is also modeled after a previous experiment with Snort which can be found [here](https://github.com/megansteinmasel/snort-malware-detection).
 
 ### Steps
-1. Create a Python Web Server
+1. Create a Benign File
+2. Create a Python Web Server
     * [Instructions](https://www.geeksforgeeks.org/network-programming-python-http-server/)
-    * Create an index.html file that contains a download button for the benign file 
-2. Put Networks in Promiscuous Mode
+    * Create an index.html file that contains a download button for the benign file.
+3. Put Networks in Promiscuous Mode
     * `sudo ip link set dev enp0s31f6 promisc on`
     * `sudo ip link set dev lo promisc on`
-3. Start Packet Capture on Wireshark
-4. Spin Up Web Server
+4. Start Packet Capture on Wireshark
+5. Spin Up Web Server
     * Go to localhost: 8080
     * Press the download button to download the benign file
-5. Stop Packet Capture
-6. Run Snort on Packet Capture
+6. Stop Packet Capture
+7. Run Snort on Packet Capture
    * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none -r wireshark-captures/download.pcapng`
      * This flag specifies that Snort should read network traffic data from a pcap file located at wireshark-captures/download.pcapng
 
