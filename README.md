@@ -234,12 +234,12 @@
     * `sudo ip link set dev lo promisc on`
 4. Start Packet Capture on Wireshark
 5. Spin Up Web Server
-    * Go to localhost: 8080
-    * Press the download button to download the benign file
+    * Go to localhost: 8080.
+    * Press the download button to download the benign file.
 6. Stop Packet Capture
 7. Run Snort on Packet Capture
    * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none -r wireshark-captures/download.pcapng`
-     * This flag specifies that Snort should read network traffic data from a pcap file located at wireshark-captures/download.pcapng
+     * This flag specifies that Snort should read network traffic data from a pcap file located at wireshark-captures/download.pcapng.
 
 ### Running Snort
 * In Test Case Two, we ran Snort in the following manner.
