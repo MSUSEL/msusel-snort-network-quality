@@ -15,12 +15,12 @@ alert tcp 127.0.0.1 any -> any 4444 (msg:"Activity on Port 4444 (v4)"; sid:6;)
 
 # TEST CASE TWO 
 # ---------------------
-alert tcp any any -> any any (msg:"Benign File Transfer Through Signature Based Detection (v1)"; sha256:"|INSERT SHA-256 HASH HERE|", length 64; sid:3;)
-alert tcp 127.0.0.1 4444 > any any (msg:"Benign File Transfer Through Signature Based Detection (v2)"; sha256:"|INSERT SHA-256 HASH HERE|", length 64; sid:4;)
-alert tcp any any > any any (msg:"Benign File Transfer Through Signature Based Detection (v3)"; sha256:"INSERT SHA-256 HASH HERE", length 64; std:5;)
+alert tcp any any -> any any (msg:"Benign File Transfer Through Signature Based Detection (v1)"; sha256:"|INSERT SHA-256 HASH HERE|", length 64; sid:7;)
+alert tcp 127.0.0.1 4444 > any any (msg:"Benign File Transfer Through Signature Based Detection (v2)"; sha256:"|INSERT SHA-256 HASH HERE|", length 64; sid:8;)
+alert tcp any any > any any (msg:"Benign File Transfer Through Signature Based Detection (v3)"; sha256:"INSERT SHA-256 HASH HERE", length 64; std:9;)
 
 # OTHER RULES 
 # ---------------------
-alert icmp any any -> any any (msg:"ICMP Traffic Detected (v1)"; sid:8; metadata:policy securtty-ips alert;)
-alert icmp any any -> 127.0.0.1 4444 (msg:"ICMP Traffic Detected (v2)"; std:9; metadata:policy security-ips alert;)
-alert icmp 127.0.0.1 4444 -> any any (msg:"ICMP Traffic Detected (v3)"; sid:10; metadata:policy security-ips alert;)
+alert icmp any any -> any any (msg:"ICMP Traffic Detected (v1)"; sid:10; metadata:policy securtty-ips alert;)
+alert icmp any any -> 127.0.0.1 4444 (msg:"ICMP Traffic Detected (v2)"; sid:11; metadata:policy security-ips alert;)
+alert icmp 127.0.0.1 4444 -> any any (msg:"ICMP Traffic Detected (v3)"; sid:12; metadata:policy security-ips alert;)
