@@ -200,7 +200,7 @@
 * Running Snort in this manner is typically done for real-time network traffic analysis and intrusion detection. It's used to actively monitor network traffic as it flows through the specified network interface.
 
 ### Rule Descriptions
-* Below is a list of successfilly and consistently triggering Snort rules in Test Case One and their descriptions.
+* Below is a list of successfully and consistently triggering Snort rules in Test Case One and their descriptions.
   * Benign File Detected Using Content Matching (v1):
     * Description: This rule is triggered when Snort detects a TCP packet with the specified content.
     * Action: It generates an alert message stating that a benign file has been detected.
