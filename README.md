@@ -275,13 +275,53 @@
     * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
-## In Progress & Future Work
 
-### Docker 
+
+## Docker 
 
 * We are currently concentrating on analyzing network traffic between Docker containers and assessing the effectiveness of Snort in detecting security threats between containerized environments.
-* This process entails conducting a comprehensive literature review and identifying test scenarios for network traffic analysis.
-* These steps will contribute to the development of our network quality model.
+
+### Docker Communication: Pings
+
+* In this set of experiments, we will explore the communication capabilities of Docker containers through the use of pings. Specifically, we will examine how containers can interact on the default bridge network (docker0) and how they can communicate using their IP addresses rather than DNS hostnames. We will be utilizing Alpine and Ubuntu containers for these experiments because these containers have the ability to ping.
+* When Docker is started, it automatically creates a default bridge network (docker0), to which all new containers are connected unless otherwise specified. Each container on this network is assigned a unique IP address. Containers can ping each other using these IP addresses, enabling communication between them.
+* Additionally, we will use Snort, a network intrusion detection system, to listen for and capture ping alerts. This will help us monitor and analyze the communication between the containers in real-time.
+* Throughout this documentation, the '$' symbol will be used to indicate terminal commands.
+
+#### Alpine Containers: IP Address Pings
+* Alpine Docker containers are lightweight and efficient virtualized environments designed for running applications with minimal overhead. These containers utilize Alpine Linux as their base image, known for its small footprint and security-focused design. Alpine Linux's compact size contributes to faster deployment times and reduced resource consumption compared to traditional Linux distributions, making it ideal for deploying microservices and other containerized applications. Alpine Docker containers are particularly popular in scenarios where optimizing resource usage and maximizing performance are critical, offering developers a streamlined platform without sacrificing functionality or security.
+
+#### Steps
+1. Check Docker Networks
+   * `$ docker network ls`
+     * We should see the bridge, host, and none.
+       * The bridge network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other, while isolating them from containers not connected to that bridge network.
+       * The host network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
+       * The none network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
+2. Start Two Alpine Containers
+   * `$ ‎docker run -dit —name alpine1 alpine ash`
+   * `$ ‎‎docker run -dit —name alpine2 alpine ash`
+     * These commands are used to start and run a Docker container.
+       * `docker run` indicates that we are starting and running a container.
+       * `-d` starts the container in detach mode, where the container runs in the background.
+       * `-i` keeps STDIN open if not attached, allowing us to interact with the container.
+       * `-t` allocates a pseudo-TTY, which mimics a terminal.
+       * `--name alpine1` assigns the name ‘alpine1’ to the container.
+       * `alpine` specifies the type of Docker container to start and run.
+       * `ash` is the command the container runs when it starts, ‘ash’ is a default shell in Alpine.
+3. Check Containers Started
+   * `$ ‎docker contianer ls`
+4. Start Snort
+   * Open a new terminal window and run Snort on the docker0 interface with the following command.
+     * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i docker0 -A alert_fast -k none`
+       * For an in-depth description of running Snort, view the Snort Introduction.
+5. Ping Alpine2 From Apline1
+   * `$ docker exec -it apline1 ash`
+   * `root@alpine1:/# ‎ping -c 2 172.17.0.3`
+6. Stop Snort & Check Logs
+   * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
+
+## In Progress & Future Work
 
 ### Network Quality
 
