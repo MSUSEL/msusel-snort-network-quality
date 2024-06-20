@@ -283,7 +283,7 @@
 ### Docker Communication: Pings
 * In this set of experiments, we will explore the communication capabilities of Docker containers through the use of pings. Specifically, we will examine how containers can interact on the default bridge network (docker0) and how they can communicate using their IP addresses rather than DNS hostnames. We will be utilizing Alpine and Ubuntu containers for these experiments because these containers have the ability to ping.
 * When Docker is started, it automatically creates a default bridge network (docker0), to which all new containers are connected unless otherwise specified. Each container on this network is assigned a unique IP address. Containers can ping each other using these IP addresses, enabling communication between them.
-* Additionally, we will use Snort, a network intrusion detection system, to listen for and capture ping alerts. This will help us monitor and analyze the communication between the containers in real-time.
+* Additionally, we will use Snort, a network intrusion detection system, to listen for and capture ping alerts. This will help us monitor and analyze the communication between the containers in real time.
 * Throughout this documentation, the '$' symbol will be used to indicate terminal commands.
 
 #### Alpine Containers: IP Address Pings
@@ -297,8 +297,8 @@
        * The host network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
        * The none network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
 2. Start Two Alpine Containers
-   * `$ ‎docker run -dit —name alpine1 alpine ash`
-   * `$ ‎‎docker run -dit —name alpine2 alpine ash`
+   * `$ ‎docker run -dit —-name alpine1 alpine ash`
+   * `$ ‎‎docker run -dit —-name alpine2 alpine ash`
      * These commands are used to start and run a Docker container.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
@@ -339,8 +339,8 @@
 
 #### Steps
 1. Run Two Ubuntu Containers
-   * `$ ‎docker run -dit —name ubuntu1 ubuntu`
-   * `$ ‎docker run -dit —name ubuntu1 ubuntu`
+   * `$ ‎docker run -dit —-name ubuntu1 ubuntu`
+   * `$ ‎docker run -dit —-name ubuntu1 ubuntu`
      * These commands are used to start and run a Docker container.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
