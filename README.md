@@ -362,14 +362,18 @@
       * This command updates the list of available packages and their versions.
     * `‎‎root@ubuntu1:/# apt-get install isutils-ping`
       * This command installs the iputils-ping package, which includes the ping command.
-5. Ping Ubuntu2 From Ubuntu1
+5. Start Snort
+   * Open a new terminal window and run Snort on the docker0 interface with the following command.
+     * `$ sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i docker0 -A alert_fast.txt -k none`
+       * For an in-depth description of running Snort, view the Snort Introduction.
+6.  Ping Ubuntu2 From Ubuntu1
    * First, find the IP address of ubuntu2.
      * `$ sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubuntu2`
        * This command is used to inspect a Docker container and retrieve specific information about it.
    * Second, use the IP address to ping ubuntu2 from ubuntu1.
      * ‎‎`root@ubuntu1:/# ping -c 2 173.13.0.3`
        * This command sends 2 ICMP echo requests to the network host with the IP address 173.13.0.3 from within the ubuntu1 container.
-6. Stop Snort & Check Logs
+7. Stop Snort & Check Logs
    * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
 
 #### Results
