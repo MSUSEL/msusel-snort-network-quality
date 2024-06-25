@@ -296,7 +296,7 @@
        * The bridge network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other, while isolating them from containers not connected to that bridge network.
        * The host network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
        * The none network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
-2. Start Two Alpine Containers
+2. Start & Run Two Alpine Containers
    * `$ ‎docker run -dit —-name alpine1 alpine ash`
    * `$ ‎‎docker run -dit —-name alpine2 alpine ash`
      * These commands are used to start and run a Docker container.
@@ -338,7 +338,7 @@
 * Ubuntu Docker containers leverage Ubuntu Linux as their foundational image, providing a versatile platform for deploying a wide range of applications within Dockerized environments. Known for its extensive package repositories and widespread community support, Ubuntu offers robust compatibility and ease of use for developers familiar with Debian-based systems. Ubuntu Docker containers are favored for their comprehensive software ecosystem, enabling easy integration of dependencies and libraries necessary for complex applications. While slightly larger in size compared to Alpine, Ubuntu containers are preferred in scenarios where full compatibility with Ubuntu-specific software and packages is required, balancing flexibility with a broader support network within the Docker ecosystem.
 
 #### Steps
-1. Run Two Ubuntu Containers
+1. Start & Run Two Ubuntu Containers
    * `$ ‎docker run -dit —-name ubuntu1 ubuntu`
    * `$ ‎docker run -dit —-name ubuntu1 ubuntu`
      * These commands are used to start and run a Docker container.
