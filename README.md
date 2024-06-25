@@ -299,7 +299,7 @@
 2. Start & Run Two Alpine Containers
    * `$ ‎sudo docker run -dit —-name alpine1 alpine ash`
    * `$ ‎‎sudo docker run -dit —-name alpine2 alpine ash`
-     * These commands are used to start and run a Docker container.
+     * These commands are used to start and run an alpine Docker container.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
        * `-i` keeps STDIN open if not attached, allowing us to interact with the container.
@@ -322,6 +322,7 @@
        * `alpine1` is the name of the container in which the command is executed.
        * `ash` opens a default shell.
    * `root@alpine1:/# ‎ping -c 2 172.17.0.3`
+     * This command sends 2 ICMP echo requests to the network host with the IP address 173.13.0.3 from within the alpine1 container.
 6. Stop Snort & Check Logs
    * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
 
@@ -341,12 +342,12 @@
 1. Start & Run Two Ubuntu Containers
    * `$ sudo ‎docker run -dit —-name ubuntu1 ubuntu`
    * `$ sudo ‎docker run -dit —-name ubuntu1 ubuntu`
-     * These commands are used to start and run a Docker container.
+     * These commands are used to start and run an Ubuntu Docker container.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
        * `-i` keeps STDIN open if not attached, allowing us to interact with the container.
        * `-t` allocates a pseudo-TTY, which mimics a terminal.
-       * `--name ubuntu1` assigns the name ‘alpine1’ to the container.
+       * `--name ubuntu1` assigns the name ‘ubuntu1’ to the container.
        * `ubuntu` specifies the type of Docker container to start and run.
  2. Check Containers Started
     * `$ sudo ‎docker contianer ls`
@@ -366,7 +367,7 @@
    * Open a new terminal window and run Snort on the docker0 interface with the following command.
      * `$ sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i docker0 -A alert_fast.txt -k none`
        * For an in-depth description of running Snort, view the Snort Introduction.
-6.  Ping Ubuntu2 From Ubuntu1
+6. Ping Ubuntu2 From Ubuntu1
    * First, find the IP address of ubuntu2.
      * `$ sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubuntu2`
        * This command is used to inspect a Docker container and retrieve specific information about it.
