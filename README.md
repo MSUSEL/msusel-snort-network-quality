@@ -292,14 +292,14 @@
 #### Steps
 1. Check Docker Networks
    * `$ sudo docker network ls`
-     * We should see the bridge, host, and none.
-       * The bridge network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other, while isolating them from containers not connected to that bridge network.
-       * The host network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
-       * The none network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
+     * We should see the bridge, host, and none networks.
+       * The 'bridge' network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other, while isolating them from containers not connected to that bridge network.
+       * The 'host' network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
+       * The 'none' network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
 2. Start & Run Two Alpine Containers
    * `$ ‎sudo docker run -dit —-name alpine1 alpine ash`
    * `$ ‎‎sudo docker run -dit —-name alpine2 alpine ash`
-     * These commands are used to start and run an alpine Docker container.
+     * These commands are used to start and run Alpine Docker containers.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
        * `-i` keeps STDIN open if not attached, allowing us to interact with the container.
@@ -322,7 +322,7 @@
        * `alpine1` is the name of the container in which the command is executed.
        * `ash` opens a default shell.
    * `root@alpine1:/# ‎ping -c 2 172.17.0.3`
-     * This command sends 2 ICMP echo requests to the network host with the IP address 173.13.0.3 from within the alpine1 container.
+     * This command sends 2 ICMP echo requests to the network host with the IP address 173.13.0.3 from within the 'alpine1' container.
 6. Stop Snort & Check Logs
    * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
 
@@ -342,7 +342,7 @@
 1. Start & Run Two Ubuntu Containers
    * `$ sudo ‎docker run -dit —-name ubuntu1 ubuntu`
    * `$ sudo ‎docker run -dit —-name ubuntu1 ubuntu`
-     * These commands are used to start and run an Ubuntu Docker container.
+     * These commands are used to start and run Ubuntu Docker containers.
        * `docker run` indicates that we are starting and running a container.
        * `-d` starts the container in detach mode, where the container runs in the background.
        * `-i` keeps STDIN open if not attached, allowing us to interact with the container.
