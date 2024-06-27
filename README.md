@@ -24,7 +24,7 @@
 
 * We are employing Snort 3 for real-time threat detection in our research project.
 * Consult the official [Snort 3 Documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
-* If you wish to bypass the 'Introduction to Snort' and proceed to our 'Problem Statement,' click [here](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#problem-statement).
+* If you wish to bypass the "Introduction to Snort" and proceed to our "Problem Statement," click [here](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#problem-statement).
 
 ### Snort Overview
 
@@ -56,16 +56,16 @@
   * Content-Matching: Allows matching based on the content of the packet payload.
   * Byte-Testing: Tests specific byte sequences within packets.
 * Combining the rule header with the rule options produces the following Snort rule structure:
-  * [Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])
-    * Action: This specifies what action Snort should take when the rule matches. Common actions include "alert," which generates an alert, and "drop," which drops the packet.
-      * Other options include "log," "pass," "reject," "sdrop," and "dynamic."
-    * Protocol: This specifies the network protocol being used, such as TCP, UDP, ICMP, or IP.
-    * Source IP: This specifies the source IP address from which the traffic originates.
-    * Source Port: This specifies the source port number on the source IP.
-    * Direction: Dictates which IP address and port number is the source and which is the destination.
-    * Destination IP: This specifies the destination IP address to which the traffic is being sent.
-    * Destination Port: This specifies the destination port number on the destination IP.
-    * Options: This optional field can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
+  * `[Action] [Protocol] [Source IP] [Source Port] -> [Destination IP] [Destination Port] ([Options])`
+    * `Action` specifies what action Snort should take when the rule matches. Common actions include 'alert,' which generates an alert, and 'drop,' which drops the packet.
+      * Other options include 'log,' 'pass,' 'reject,' 'sdrop,' and 'dynamic.'
+    * `Protocol` specifies the network protocol being used, such as TCP, UDP, ICMP, or IP.
+    * `Source IP` specifies the source IP address from which the traffic originates.
+    * `Source Port` specifies the source port number on the source IP.
+    * `->` (alternatively, `<-`) dictates which IP address and port number is the source and which is the destination.
+    * `Destination IP` specifies the destination IP address to which the traffic is being sent.
+    * `Destination Port` specifies the destination port number on the destination IP.
+    * `Options` is an optional field that can include additional parameters to refine the rule, such as payload content to match against, packet length, or specific flags.
 * To get started writing custom Snort rules, we used [Snorpy](http://snorpy.cyb3rs3c.net/) to initiate the process.
 
 ### Snort Community Rulesets and Custom Rules
@@ -86,7 +86,7 @@
     * Include a custom ruleset file that Snort will utilize during the detection process.
       * ` ips = {variables = default_variables, include = 'local.rules'} `
   * Section 7: Configure Outputs
-    * Uncomment the alert_fast line to enable the output log and specify file options.
+    * Uncomment the 'alert_fast' line to enable the output log and specify file options.
       * ` alert_fast = {file = true} `
 
  * With this comprehensive overview of Snort, we're ready to delve into the project details.
@@ -159,7 +159,7 @@
 
 ### Steps
   1. Create a Benign File
-      * This file will be referred to as file_to_send.txt.
+      * This file will be referred to as 'file_to_send.txt.'
   3. Find a Port Number
       * `netstat -an | grep 4444`
       * `netstat -an | grep LISTEN | grep 4444`
@@ -171,21 +171,21 @@
   6. Start Snort
       * Terminal window 1:
         * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
-          * “-A alert_fast” tells Snort to direct the alerts to alert_fast.txt.
-          * “-c /usr/local/etc/snort/snort.lua” specifies the Snort configuration.
-          * “-i lo” specifies the interface that Snort should listen on for traffic.
-          * “-R /usr/local/etc/snort/local.rules” specifies the rule file.
-          * “-k none” disables checksum validation of packets.
+          * `-A alert_fast` tells Snort to direct the alerts to 'alert_fast.txt.'
+          * `-c /usr/local/etc/snort/snort.lua` specifies the location of the Snort configuration.
+          * `-i lo` specifies the interface that Snort will listen on for traffic.
+          * `-R /usr/local/etc/snort/local.rules` specifies the location of the rule file.
+          * `-k none` disables checksum validation of packets.
   7. Send Benign File Using Netcat
       * Terminal window 2:
         * `nc -l 4444`
       * Terminal window 3:
         * `nc 127.0.0.1 4444 < file_to_send.txt`
-          * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444.
-          * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection.
+          * `nc 127.0.0.1 4444` establishes a connection to the local machine (127.0.0.1) on port 4444.
+          * `< file_to_send.txt` uses input redirection (<) to read data from the file named 'file_to_send.txt' and sends through the established connection.
   8. Stop Snort
-     * End Snort by holding the command button and pressing "c" on the keyboard.
-     * Check the alert_fast.txt output log.
+     * End Snort by holding the command button and pressing 'c' on the keyboard.
+     * Check the 'alert_fast.txt' output log.
 
 ### Running Snort
 * In Test Case One, we ran Snort in the following manner.
@@ -226,7 +226,7 @@
 * While Snort was alerting consistently, the runtime somewhat varied across executions in Test Case One.
   * The mean runtime of Snort was 93.868 seconds in Test Case One.
   * Found that running Snort on Wireshark captures created a consistent and fast runtime.
-* Found that the Snort rule in local.rules with SID: 2 would only trigger while running Snort on Wireshark captures.
+* Found that the Snort rule in local.rules with 'SID: 2' would only trigger while running Snort on Wireshark captures.
 
 ## 🕵🏻‍♀️ Test Case Two - Explore SHA-256 Hash-Matching
 
@@ -235,20 +235,21 @@
 
 ### Steps
 1. Create a Benign File
-2. Create a Python Web Server
+   * `touch benign.txt`
+3. Create a Python Web Server
     * [Instructions](https://www.geeksforgeeks.org/network-programming-python-http-server/)
     * Create an index.html file that contains a download button for the benign file.
-3. Put Networks in Promiscuous Mode
+4. Put Networks in Promiscuous Mode
     * `sudo ip link set dev enp0s31f6 promisc on`
     * `sudo ip link set dev lo promisc on`
-4. Start Packet Capture on Wireshark
-5. Spin Up Web Server
+5. Start Packet Capture on Wireshark
+6. Spin Up Web Server
     * Go to localhost: 8080.
     * Press the download button to download the benign file.
-6. Stop Packet Capture
-7. Run Snort on Packet Capture
-   * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none -r wireshark-captures/download.pcapng`
-     * This flag specifies that Snort should read network traffic data from a pcap file located at wireshark-captures/download.pcapng.
+7. Stop Packet Capture
+8. Run Snort on Packet Capture
+   * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none -r wireshark-captures/download.pcap`
+     * This flag specifies that Snort should read network traffic data from a pcap file located at wireshark-captures/download.pcap.
 
 ### Running Snort
 * In Test Case Two, we ran Snort in the following manner.
@@ -267,11 +268,9 @@
 * Here’s what we learned:
   * Using hash options (MD5, SHA-256, SHA-512) for real-time payload detection is inefficient.
   * Without adding extra clarification for content-matching beforehand, every single packet’s hash value will have to be calculated.
-    * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
 ## 📦 Docker 
-* We are currently concentrating on analyzing network traffic between Docker containers and assessing the effectiveness of Snort in detecting security threats between containerized environments.
 
 ### Docker Communication: Pings
 * In this set of experiments, we will explore the communication capabilities of Docker containers through the use of pings. Specifically, we will examine how containers can interact on the default bridge network (docker0) and how they can communicate using their IP addresses rather than DNS hostnames. We will be utilizing Alpine and Ubuntu containers for these experiments because these containers have the ability to ping.
@@ -286,7 +285,7 @@
 1. Check Docker Networks
    * `$ sudo docker network ls`
      * We should see the bridge, host, and none networks.
-       * The 'bridge' network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other, while isolating them from containers not connected to that bridge network.
+       * The 'bridge' network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other while isolating them from containers not connected to that bridge network.
        * The 'host' network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
        * The 'none' network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
 2. Start & Run Two Alpine Containers
