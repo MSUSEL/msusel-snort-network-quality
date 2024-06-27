@@ -20,15 +20,15 @@
 ### Research Overview
 * In this research project we explore the integration of Snort, an open-source network intrusion detection and prevention system, with Wireshark to analyze network quality, particularly within cloud microservice ecosystems. Through a detailed examination of Snort's architecture, configuration setup, and test cases, a testing environment is established, alongside enhanced proficiency in Snort's custom detection rules. By leveraging metrics such as severity and frequency of Snort alerts, the exploration of network traffic analysis between Docker environments is ongoing, aiming to quantify the impact of malware on network integrity and thereby contributing to the advancement of cybersecurity practices.
 
-## Introduction to Snort 
+## 📓 Introduction to Snort 
 
 * We are employing Snort 3 for real-time threat detection in our research project.
-* Consult the official [Snort 3 documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
+* Consult the official [Snort 3 Documentation](https://docs.snort.org/start/) for configuration and rule-writing guidance.
 * If you wish to bypass the 'Introduction to Snort' and proceed to our 'Problem Statement,' click [here](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#problem-statement).
 
-### Overview
+### Snort Overview
 
-* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real-time, analyzing packets against rule files and generating alerts.
+* Snort is an open-source network intrusion detection and prevention system that monitors network traffic in real time, analyzing packets against rule files and generating alerts.
 * Detection can be done through community rulesets and custom rules.
 * Rules define the criteria for detecting specific network traffic patterns associated with known threats or suspicious activity.
 * Snort also provides detailed logging and output capabilities for effective threat investigation. 
@@ -74,14 +74,13 @@
   * To download the Snort 3 community ruleset (snort3-community-rules.tar.gz), [press here](https://www.snort.org/downloads).
 * Custom rules allow users to define their detection criteria tailored to their specific network environment and security requirements. This process encompasses creating a ruleset file and including it in Section 5 of the Snort configuration file. Below are a few examples of custom Snort rules.
   * `alert icmp any any -> any any (msg:"ICMP Ping Detected"; sid:1;)`
-    * This Snort rule detects ICMP pings from any source IP and port, to any destination IP and port.
+    * This Snort rule detects ICMP pings from any source IP and port to any destination IP and port.
   * `alert tcp any any -> any 80 (msg:"HTTP GET Request Detected"; content:"GET"; http_method; sid:2;)`
     * This Snort rule will generate an alert for any HTTP GET request sent over TCP port 80.
 
-
 ### Snort Configuration
 
-* We will be focusing on Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the configuration file. Section 5 is dedicated to configuring Snort's detection abilities. These options include enabling decoder and inspector alerts, including custom rulesets and default variables, configuring additional rule actions like react or reject, and enabling the payload injection utility. Section 7 is dedicated to configure various outputs from the detection engine. These options include event logging, packet logging, and additional log options like packet capture and file log. 
+* We will be focusing on Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the configuration file. Section 5 is dedicated to configuring Snort's detection abilities. These options include enabling decoder and inspector alerts, including custom rulesets and default variables, configuring additional rule actions like react or reject, and enabling the payload injection utility. Section 7 is dedicated to configuring various outputs from the detection engine. These options include event logging, packet logging, and additional log options like packet capture and file logging. 
 * Only Sections 5 (Configure Detection) and Section 7 (Configure Outputs) of the Snort configuration were modified to tailor the system to our project's requirements and goals. Below are the changes we made to the initial Snort configuration.
   * Section 5: Configure Detection
     * Include a custom ruleset file that Snort will utilize during the detection process.
@@ -92,30 +91,26 @@
 
  * With this comprehensive overview of Snort, we're ready to delve into the project details.
 
-## Problem Statement
+## 💡 Problem Statement
 
 * Ensuring the quality and security of software systems is crucial in our ever-expanding digital world. To that end, the Software Engineering and Cybersecurity Lab (SECL) at Montana State University developed PIQUE: a Platform for Investigative software Quality Understanding and Evaluation. PIQUE is a language-agnostic system that can be adjusted for language-specific static-analysis operations. One PIQUE model focuses on measuring the quality of cloud microservice ecosystems. Cloud ecosystems use tools like Docker, an open-source development tool, to deploy, run, update, and manage containerized services to create efficient and scalable web applications. Our research is focused on measuring the quality of networking services, which are critical in cloud infrastructure. Computer networks are constant targets of cyber-attacks, and many incident response tools exist to defend against malicious network traffic. One of these tools is called Snort. Snort is an open-source intrusion detection and prevention system that can detect and log benign and malicious network traffic using rules. Snort rules delineate patterns to look out for in network traffic. Then, when those patterns are detected, rules will tell Snort how to react. Snort rules are powerful and have extensive customizability. By taking advantage of Snort’s flexible and powerful rule options, we can construct testing methods to measure and quantify the network quality of cloud ecosystems. Our research goal is to automate the process of running network quality tests between containerized services that use Docker.
 
-## Project Goals
+## 🔍 Project Goals
 
 * Create a stable testing environment for generating and testing Snort rules.
 * Gain proficiency in writing Snort rules.
 * Understand network traffic patterns between Docker containers.
 
-## Steps
+## 📋 Project Steps
 
-1. Install a free Linux distribution. We used Ubuntu 22.04.3 LTS.
+1. Install a free Linux distribution. 
 2. Install the most recent versions of Snort, Docker, and Wireshark.
 3. Configure Snort, Docker, and Wireshark.
-4. Validate consistency of tools:
-   * Test the consistency of Snort.
-   * Test communication between Docker containers.
-5. Introduce malware:
-   * Containerize malware with Docker.
-   * Analyze communication patterns and specific packets triggering Snort alerts in Wireshark.
-7. Develop a scheme for measuring the effect of Snort alerts on network quality (severity & frequency).
+4. Validate the consistency of Snort.
+5. Test communication between Docker containers.
+6. Develop a scheme for measuring the effect of Snort alerts on network quality (severity & frequency).
 
-## Environment 
+## 🖥️ Environment 
 
 * Operating System: Ubuntu Linux Version 22.04.3 LTS
 * Wireshark Version 4.2.2-1 ubuntu22.04.0 ppa2
@@ -157,7 +152,7 @@
     * LZMA Version: 5.2.5
 
 
-## Test Case One - Test for Consistency
+## 🕵🏻‍♀️ Test Case One - Test for Consistency
 
 ### Description
   * Test Case One ensures the consistent and proper functioning of Snort. Test Case One will verify if Snort can detect a TCP connection through Netcat by sending a benign file with a specific port number and matching the content of the file data.
@@ -189,7 +184,7 @@
           * “nc 127.0.0.1 4444” establishes a connection to the local machine (127.0.0.1) on port 4444.
           * “< file_to_send.txt” uses input redirection (<) to read data from the file named file_to_send.txt and sends through the established connection.
   8. Stop Snort
-     * End Snort with holding the command button and pressing "c" on the keyboard.
+     * End Snort by holding the command button and pressing "c" on the keyboard.
      * Check the alert_fast.txt output log.
 
 ### Running Snort
@@ -233,7 +228,7 @@
   * Found that running Snort on Wireshark captures created a consistent and fast runtime.
 * Found that the Snort rule in local.rules with SID: 2 would only trigger while running Snort on Wireshark captures.
 
-## Test Case Two - Explore SHA-256 Hash-Matching
+## 🕵🏻‍♀️ Test Case Two - Explore SHA-256 Hash-Matching
 
 ### Description
 * Test Case Two was created to test Snort’s SHA-256 hash-matching and signature-based detection capabilities. This test case is also modeled after a previous experiment with Snort which can be found [here](https://github.com/megansteinmasel/snort-malware-detection).
@@ -275,9 +270,7 @@
     * Note - This could be the reason for varying runtime in Test Case One since some signature-based detection rules were in our rule file at the time.
   * Often won’t work for larger files as files must be reassembled from memory. 
 
-
-
-## Docker 
+## 📦 Docker 
 * We are currently concentrating on analyzing network traffic between Docker containers and assessing the effectiveness of Snort in detecting security threats between containerized environments.
 
 ### Docker Communication: Pings
@@ -381,16 +374,14 @@
 * Similarly to the Alpine container results, the experiment was successful, as evidenced by the four Snort alerts received while monitoring for pings. These alerts were triggered by the ICMP (Internet Control Message Protocol) echo requests and replies generated by the ping command. By following the outlined steps, we verified communication between Docker containers on the default bridge network.
 * Initially, we started two Ubuntu containers (ubuntu1 and ubuntu2). After connecting to ubuntu1 and installing the necessary ping utility, we retrieved the IP address of ubuntu2. We then executed pings from ubuntu1 to ubuntu2 using the obtained IP address. With Snort running on the docker0 interface, it successfully detected the ICMP echo requests and replies, generating four alerts. This confirmed the effectiveness of our setup in monitoring and capturing network traffic between Docker containers.
 
-## In Progress & Future Work
-
-### Network Quality
+## 📶 Network Quality
 
 * Although the quality of network security between Docker containers has not been measured before, we suspect that using Snort for network traffic analysis, measuring severity (priority level of Snort rule triggered) and frequency (amount of Snort rules triggered), can be beneficial. This measurement, focusing on severity and frequency, is currently being integrated into our expanding model. Additionally, the depiction of this process in our evolving quality tree model signifies ongoing development toward the evaluation of network security.
 
   <img src="readme-images/quality-tree-dark.png" height="100%" width="100%"> 
 
 
-## Other Works
+## 📂 Other Works
 
 * Excited to have shared our latest research on Snort Intrusion Detection for Network Traffic Analysis Between Docker Containers at the Montana State University Research Celebration! Grateful for the opportunity to connect with fellow student researchers!
 * The Spring 2024 MSU Research Celebration Program can be found [here](https://www.montana.edu/usp/src-programs/2024SpringResearchCelebrationProgram.pdf).
