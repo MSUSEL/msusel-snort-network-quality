@@ -305,7 +305,7 @@
 4. Start Snort
    * Open a new terminal window and run Snort on the docker0 interface with the following command.
      * `$ sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i docker0 -A alert_fast.txt -k none`
-       * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#introduction-to-snort).
+       * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#-introduction-to-snort).
 5. Ping Alpine2 From Apline1
    * `$ sudo docker exec -it apline1 ash`
      * This line is used to execute a command in the ‘alpine1’ Docker container.
@@ -359,7 +359,7 @@
 5. Start Snort
    * Open a new terminal window and run Snort on the docker0 interface with the following command.
      * `$ sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i docker0 -A alert_fast.txt -k none`
-       * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#introduction-to-snort).
+       * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#-introduction-to-snort).
 6. Ping Ubuntu2 From Ubuntu1
    * First, find the IP address of ubuntu2.
      * `$ sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubuntu2`
@@ -418,7 +418,7 @@
        * `ping alpine1` sends ICMP echo requests to the 'alpine1' container.
 6. Run Snort on Wireshark Capture
     * `$ sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -A alert_fast.txt -k none -r alpine.pcap`
-      * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#introduction-to-snort).
+      * For an in-depth description of running Snort, view the [Introduction to Snort](https://github.com/megansteinmasel/snort-network-quality/blob/main/README.md#-introduction-to-snort).
 7. Stop Snort & Check Logs
     * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
 
