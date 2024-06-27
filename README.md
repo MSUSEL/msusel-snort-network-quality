@@ -388,7 +388,7 @@
        * `alpine-net` is the name of the new network.
 2. Verify Networks
    * `$ sudo docker network ls`
-     * We should see the new user-defined network, ‘alpine-net’.
+     * We should see the new user-defined network, ‘alpine-net.'
 3. Start & Run Two Alpine Containers
    * `$ sudo docker run -dit –-name alpine1 –-network alpine-net alpine ash`
    * `$ sudo docker run -dit –-name alpine2 –-network alpine-net alpine ash`
