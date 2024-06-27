@@ -167,7 +167,7 @@
       * `sudo ip link set dev enp0s31f6 promisc on`
       * `sudo ip link set dev lo promisc on`
   5. Create Snort Rules
-      * Create a rule file and add the rules in local.rules.
+      * Create a rule file and add the rules in [local.rules](https://github.com/megansteinmasel/snort-network-quality/blob/main/local.rules).
   6. Start Snort
       * Terminal window 1:
         * `sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/local.rules -i lo -A alert_fast -k none`
