@@ -421,8 +421,9 @@
 7. Stop Snort & Check Logs
     * Stop Snort with ‘command c’ and view the log file, ‘alert_fast.’
 
-
-
+#### Results
+* The experiment was successful as we received a Snort alert for each executed ping. These alerts were triggered by ICMP (Internet Control Message Protocol) echo requests and replies generated through the ping command. Following the outlined steps, we confirmed communication between Docker containers on the user-defined network.
+* We initially created a user-defined network to facilitate secure communication between Docker containers. After verifying the network setup, we started and ran two Alpine containers within this network. We then initiated Wireshark to capture network packets for analysis. Using ICMP echo requests, we tested communication between the containers. Finally, we analyzed the captured packets using Snort for network monitoring and reviewed the generated alerts in the log file.
 
 
 
