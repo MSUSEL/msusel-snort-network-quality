@@ -285,9 +285,9 @@
 1. Check Docker Networks
    * `$ sudo docker network ls`
      * We should see the bridge, host, and none networks.
-       * The 'bridge' network in Docker is a software device that allows containers connected to the same bridge network to communicate with each other while isolating them from containers not connected to that bridge network.
-       * The 'host' network in Docker is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
-       * The 'none' network in Docker is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
+       * The 'bridge' network is a software device that allows containers connected to the same bridge network to communicate with each other while isolating them from containers not connected to that bridge network.
+       * The 'host' network is a mode where a container shares the Docker host's network stack, allowing direct access to the host's network interfaces without network isolation or its own IP address.
+       * The 'none' network is a mode that completely isolates a container's networking stack; within the container, only the loopback device is created, meaning it has no external network access.
 2. Start & Run Two Alpine Containers
    * `$ ‎sudo docker run -dit —-name alpine1 alpine ash`
    * `$ ‎‎sudo docker run -dit —-name alpine2 alpine ash`
