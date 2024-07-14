@@ -425,11 +425,9 @@
 * The experiment was successful as we received a Snort alert for each executed ping. These alerts were triggered by ICMP (Internet Control Message Protocol) echo requests and replies generated through the ping command. Following the outlined steps, we confirmed communication between Docker containers on the user-defined network.
 * We initially created a user-defined network to facilitate secure communication between Docker containers. After verifying the network setup, we started and ran two Alpine containers within this network. We then initiated Wireshark to capture network packets for analysis. Using ICMP echo requests, we tested communication between the containers. Finally, we analyzed the captured packets using Snort for network monitoring and reviewed the generated alerts in the log file.
 
-
-
-
-
-
+### DNS Hostname vs IP Address
+* When utilizing Docker, understanding the difference between IP addresses and DNS hostnames on user-defined networks versus the default bridge network (docker0) is crucial for effective container communication. User-defined bridge networks offer DNS resolution between containers, allowing them to resolve each other by name or alias. This means containers can communicate using DNS hostnames, simplifying Docker connectivity. For instance, if you have containers named ‘web’ and ‘db’ on a user-defined network, the ‘web’ container can connect to the ‘db’ container using the hostname ‘db,’ regardless of the Docker host's location. This automated DNS resolution enhances flexibility and scalability in containerized environments.
+* Conversely, on the default bridge network, docker0, containers primarily rely on IP addresses for communication, unless supplemented by the deprecated --link option. This setup lacks built-in DNS resolution between containers, necessitating manual IP address management or legacy linking mechanisms. In scenarios where applications run on the default bridge network, administrators often resort to configuring /etc/hosts files within containers or manually establishing links, which can lead to maintenance challenges and obscure debugging processes. This limitation underscores the benefits of user-defined networks, where Docker's DNS service streamlines container intercommunication.
 
 ## 📶 Network Quality
 
