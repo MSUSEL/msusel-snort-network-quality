@@ -448,13 +448,14 @@
 
 ## References
 
+Chrisjd20. (2019). Snorpy. Github. https://github.com/chrisjd20/Snorpy
+
+Docker. (2024). Home. Docker Documentation. https://docs.docker.com/
+
 Shah, S. N., & Singh, P. (2012). Signature-based network intrusion detection system using Snort and WinPcap. International Journal of Engineering Research & Technology (IJERT), 1(10), 2278-0181.
 
 Snort. (n.d.). Snort 3 rule writing guide: Getting started with Snort 3. Snort Project. https://docs.snort.org/start/
 
-chrisjd20. (2019). Snorpy. Github. https://github.com/chrisjd20/Snorpy
-
-Docker. (2024). Home. Docker Documentation. https://docs.docker.com/
 
 
 
