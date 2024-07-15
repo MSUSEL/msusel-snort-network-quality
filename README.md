@@ -272,6 +272,9 @@
 
 ## 📦 Docker 
 
+### Docker Engine vs Docker Desktop
+* Docker Engine is the core technology of Docker, providing a command-line interface (CLI) for direct management of containers and images. It operates by interfacing directly with the host's kernel, offering detailed visibility into Docker environments, including aspects like the docker0 networking interface. In contrast, Docker Desktop is a comprehensive application designed to simplify the development, deployment, and management of containerized applications through a graphical user interface (GUI). Docker Desktop abstracts away the need for direct kernel access, instead using a virtualized environment. This difference is crucial for tasks requiring specific network configurations, such as using Snort to monitor traffic between Docker containers. Achieving this is more straightforward with Docker Engine due to its direct kernel access, whereas Docker Desktop's virtualized setup presents challenges.
+
 ### Docker Communication: Pings
 * In this set of experiments, we will explore the communication capabilities of Docker containers through the use of pings. Specifically, we will examine how containers can interact on the default bridge network (docker0) and how they can communicate using their IP addresses rather than DNS hostnames. We will be utilizing Alpine and Ubuntu containers for these experiments because these containers have the ability to ping.
 * When Docker is started, it automatically creates a default bridge network (docker0), to which all new containers are connected unless otherwise specified. Each container on this network is assigned a unique IP address. Containers can ping each other using these IP addresses, enabling communication between them.
